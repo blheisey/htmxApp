@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src=https://unpkg.com/htmx.org@1.9.11 integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0" crossorigin="anonymous"></script>
+    <script src=https://cdn.tailwindcss.com></script>
+    <!-- <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+    <meta name="htmx-config" content='{"selfRequestsOnly":false}'> -->
+  </head>
+  <body>
+    <div class="border-blue-600 border-2 w-96 mx-auto my-5 content-center">
+      <form hx-get="http://localhost:5000/htmxapp-119a9/us-central1/test" hx-target="#userList" hx-swap="beforebegin">
+        <div>
+          <label>Name</label>
+          <input type="text" name="name" value=""/>
+        </div>
+        <div>
+          <label>Major</label>
+          <input type="text" name="major" value=""/>
+        </div>
+        <div>
+          <label>Quote</label>
+          <input type="text" name="quote" value=""/>
+        </div>
+
+        <button>Submit</button>
+      </form>
+    </div>
+    <!-- <div hx-get="https://home-mnvqu77kaq-uc.a.run.app" hx-target="#target"></div>
+    <div id="target"></div> -->
+    
+  <div class="users">
+    <br id="userList"/>
+  </div>
+
+  </body>
+</html>

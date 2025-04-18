@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title Weather App
+    script(src="https://unpkg.com/htmx.org@1.9.5")
+  body
+    h1 Weather App
+
+    h2 hx-get="getWeatherHeading" hx-trigger="load" hx-target="#weatherHeading" hx-swap="innerHTML"
+    #weatherHeading
+
+    //- div hx-get="getAirQuality" hx-trigger="load" hx-target="#airQuality" hx-swap="innerHTML"
+    //-   div(id="airQuality")
+    //-     p Loading weather data...
+
+    //- div hx-get="getUVIndex" hx-trigger="load" hx-target="#uvIndex" hx-swap="innerHTML"
+    //-   div(id="uvIndex")
+    //-     p Loading weather data...   
