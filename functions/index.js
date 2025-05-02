@@ -38,44 +38,44 @@ const pug = require("pug");
 const axios = require("axios");
 
 
-exports.test = onRequest((req, res) => {
-    const template = pug.compileFile("views/test.pug");
-    let markup = template({
-      name: req.query.name,
-      major: req.query.major,
-      quote: req.query.quote
-    });
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.end(markup);
-})
+// exports.test = onRequest((req, res) => {
+//     const template = pug.compileFile("views/test.pug");
+//     let markup = template({
+//       name: req.query.name,
+//       major: req.query.major,
+//       quote: req.query.quote
+//     });
+//     res.writeHead(200, { 'Content-Type': 'text/html' });
+//     res.end(markup);
+// })
 
 // exports.home = onRequest((req, res) => {
 //     const template = pug.compileFile("index.pug");
 //     const html = template();
 //     res.status(200).send(html);
 // });
-// //comment
-// exports.getWeatherHeading = onRequest(async (request, response) => {
-//   let city = "Missoula";
+//comment
+exports.getWeatherHeading = onRequest(async (request, response) => {
+  let city = "Missoula";
 
-//   try {
-//     const apiKey = "832697448b834ed88ef224536250504"; // Replace with your real API key
-//     const weatherApiUrl = ` http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
-//     const res = await axios.get(weatherApiUrl);
+  try {
+    const apiKey = '832697448b834ed88ef224536250504'; // Replace with your real API key
+    const weatherApiUrl = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
+    const res = await axios.get(weatherApiUrl);
 
-//     const data = res.data;
-//     const template = pug.compileFile("weatherResult.pug");
-//     const markup = template({
-//       location: data.location.name,
-//     });
+    const data = res.data;
+    const template = pug.compileFile("weatherResult.pug");
+    const markup = template({
+      location: data.location.name,
+    });
 
-//     response.status(200).send(markup);
-//   } catch (err) {
-//     const template = pug.compileFile("weatherResult.pug");
-//     const markup = template({ error: "Could not fetch weather." });
-//     response.status(500).send(markup);
-//   }
-// });
+    response.status(200).send(markup);
+  } catch (err) {
+    const template = pug.compileFile("weatherResult.pug");
+    const markup = template({ error: "Could not fetch weather." });
+    response.status(500).send(markup);
+  }
+});
 
 
 
