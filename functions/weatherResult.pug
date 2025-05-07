@@ -1,5 +1,46 @@
-div
+div(class="w-full px-4 sm:px-8 lg:px-16" role="main")
   if error
-    p(style="color: red")= error
+    p(class="text-red-600 text-xl text-center")= error
   else
-    h2 Weather in #{location}
+    h1(class="text-3xl sm:text-4xl md:text-5xl mt-8 text-center font-bold text-gray-800")
+      | #{location}
+      br
+      | #{temperature}°F
+      br
+      | H: #{high}°F L: #{low}°F
+      br
+      | #{condition}
+
+    section(class="mt-8 flex justify-center gap-4 w-full" aria-labelledby="wind-heading")
+      div(class="bg-gradient-to-br from-gray-100 to-gray-200 shadow-lg rounded-3xl p-6 w-full md:w-1/2")
+        h2(id="wind-heading" class="text-xl sm:text-2xl") Wind
+        p(class="text-xl sm:text-2xl" aria-label="Wind speed is #{wind} miles per hour") Wind: #{wind} mph
+        p(class="text-xl sm:text-2xl" aria-label="Wind gusts are #{gust} miles per hour") Gusts: #{gust} mph 
+        p(class="text-xl sm:text-2xl" aria-label="Wind direction is #{windDegree} degrees #{windDirection}") Direction: #{windDegree}° #{windDirection}
+
+      div(class="bg-gradient-to-br from-gray-100 to-gray-200 shadow-lg rounded-3xl p-6 w-full md:w-1/2")
+        h2(class="text-xl sm:text-2xl") Precipitation 
+        p(class="text-xl sm:text-2xl" aria-label="Chance of rain is #{chanceOfRain} percent") Chance of Rain: #{chanceOfRain}%
+        p(class="text-xl sm:text-2xl" aria-label="Total precipitation is #{precip} inches") Total Precipitation: #{precip} in
+
+    section(class="mt-8 flex justify-center gap-4 w-full" aria-labelledby="uv-heading")
+      div(class="bg-gradient-to-br from-gray-100 to-gray-200 shadow-lg rounded-3xl p-6 w-full")
+        h2(id="uv-heading" class="text-xl sm:text-2xl") UV Index
+        p(class="text-xl sm:text-2xl" aria-label="UV Index is #{uvIndex}") UV Index: #{uvIndex}
+    
+    section(class="mt-8 flex justify-center gap-4 w-full" aria-labelledby="humidity-heading")
+      div(class="bg-gradient-to-br from-gray-100 to-gray-200 shadow-lg rounded-3xl p-6 w-full md:w-1/2")
+        h2(id="humidity-heading" class="text-xl sm:text-2xl") Humidity
+        p(class="text-xl sm:text-2xl" aria-label="Humidity is #{humidity} percent") Humidity: #{humidity}%
+        p(class="text-xl sm:text-2xl" aria-label="Dew point is #{dewPoint} degrees Fahrenheit") Dew Point: #{dewPoint}°F
+
+      div(class="bg-gradient-to-br from-gray-100 to-gray-200 shadow-lg rounded-3xl p-6 w-full md:w-1/2")
+        h2(class="text-xl sm:text-2xl") Visibility
+        p(class="text-xl sm:text-2xl" aria-label="Visibility is #{visibility} miles") Visibility: #{visibility} mi
+        p(class="text-xl sm:text-2xl" aria-label="Cloud cover is #{cloudCover} percent") Cloud Cover: #{cloudCover}%
+
+    section(class="mt-8 flex justify-center gap-4 w-full" aria-labelledby="sun-heading")
+      div(class="bg-gradient-to-br from-gray-100 to-gray-200 shadow-lg rounded-3xl p-6 w-full")
+        h2(id="sun-heading" class="text-xl sm:text-2xl") Sunrise/Sunset
+        p(class="text-xl sm:text-2xl" aria-label="Sunrise is at #{sunrise}") Sunrise: #{sunrise}
+        p(class="text-xl sm:text-2xl" aria-label="Sunset is at #{sunset}") Sunset: #{sunset}

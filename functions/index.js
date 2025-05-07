@@ -1,72 +1,44 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * const {onCall} = require("firebase-functions/v2/https");
- * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
 
-// const {onRequest} = require("firebase-functions/v2/https");
-// const logger = require("firebase-functions/logger");
-// const pug = require("pug");
-// ;
-
-// exports.about = onRequest((request, response) => {
-//     let template = pug.compileFile("about.pug");
-//     let markup = template();
-//         response.writeHead(200, {'Content-Type': 'text/html'});
-//         response.end(markup);
-// });
-
-// exports.home = onRequest((request, response) => {
-//     let template = pug.compileFile("home.pug");
-//     let markup = template();
-//         response.writeHead(200, {'Content-Type': 'text/html'});
-//         response.end(markup);
-// });
-
-// exports.contact = onRequest((request, response) => {
-//     let template = pug.compileFile("contact.pug");
-//     let markup = template();
-//         response.writeHead(200, {'Content-Type': 'text/html'});
-//         response.end(markup);
-// });
 
 const { onRequest } = require("firebase-functions/v2/https");
 const pug = require("pug");
 const axios = require("axios");
+require('dotenv').config();
+const weatherApiKey = process.env.WEATHER_API_KEY;
 
 
-// exports.test = onRequest((req, res) => {
-//     const template = pug.compileFile("views/test.pug");
-//     let markup = template({
-//       name: req.query.name,
-//       major: req.query.major,
-//       quote: req.query.quote
-//     });
-//     res.writeHead(200, { 'Content-Type': 'text/html' });
-//     res.end(markup);
-// })
-
-// exports.home = onRequest((req, res) => {
-//     const template = pug.compileFile("index.pug");
-//     const html = template();
-//     res.status(200).send(html);
-// });
-//comment
 exports.getWeatherHeading = onRequest(async (request, response) => {
   let city = "Missoula";
 
   try {
-    const apiKey = '832697448b834ed88ef224536250504'; // Replace with your real API key
-    const weatherApiUrl = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
+    const weatherApiUrl = `http://api.weatherapi.com/v1/current.json?key=${weatherApiKey}&q=${city}`;
+    const weatherApiUrl2 = `http://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${city}&aqi=no`;
     const res = await axios.get(weatherApiUrl);
+    const res2 = await axios.get(weatherApiUrl2);
 
     const data = res.data;
+    const data2 = res2.data;
     const template = pug.compileFile("weatherResult.pug");
     const markup = template({
       location: data.location.name,
+      temperature: data.current.temp_f,
+      high: data2.forecast.forecastday[0].day.maxtemp_f,
+      low: data2.forecast.forecastday[0].day.mintemp_f,
+      condition: data.current.condition.text,
+      feelsLike: data.current.feelslike_f,
+      wind: data2.current.wind_mph,
+      gust: data2.current.gust_mph,
+      windDegree: data2.current.wind_degree,
+      windDirection: data2.current.wind_dir,
+      chanceOfRain: data2.forecast.forecastday[0].day.daily_chance_of_rain,
+      precip: data2.current.precip_in,
+      uvIndex: data2.current.uv,
+      humidity: data2.current.humidity,
+      dewPoint: data2.current.dewpoint_f,
+      visibility: data2.current.vis_miles,
+      cloudCover: data2.current.cloud,
+      sunrise: data2.forecast.forecastday[0].astro.sunrise,
+      sunset: data2.forecast.forecastday[0].astro.sunset,
     });
 
     response.status(200).send(markup);
@@ -80,10 +52,3 @@ exports.getWeatherHeading = onRequest(async (request, response) => {
 
 
 
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
-
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });

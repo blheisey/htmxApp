@@ -6,9 +6,14 @@
     <script src="https://unpkg.com/htmx.org@1.9.11" integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0" crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body class="p-6 font-sans">
+  <body>
 
-    <!-- Weather Result Will Load Here -->
+    <style>
+      body {
+      background-color: #96d6fa;
+      }
+    </style>
+
     <div 
       hx-get="http://localhost:5001/htmxapp-119a9/us-central1/getWeatherHeading" 
       hx-target="#weather" 
@@ -16,9 +21,8 @@
       hx-trigger="load">
     </div>
 
-    <div id="weather" class="mt-4 text-lg text-blue-700">
-      <!-- This will be replaced by HTMX -->
-      Loading weather...
+    <div id="weather" style="text-align: center; display: flex; justify-content: center; align-items: center; margin-top: 1rem; margin-bottom: 1rem;">
+    Loading weather...
     </div>
 
   </body>
